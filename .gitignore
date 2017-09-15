@@ -1,0 +1,7 @@
+.fontcustom-manifest.json
+
+nanogui_gen/*
+!/nanogui_gen/README.md
+!/nanogui_gen/clean.sh
+!/nanogui_gen/do_copy.py
+!/nanogui_gen/generate.py

@@ -1,0 +1,21 @@
+font_name: entypo
+css_selector: .entypo-icon-{{glyph}}
+preprocessor_path: ""
+autowidth: false
+no_hash: true
+force: false
+debug: false
+quiet: false
+
+input:
+    vectors: icons/Entypo+/
+
+# I'm eventually copying this to a sphinx website
+output:
+    fonts: _static
+    css:   _static
+
+templates:
+- scss
+- css
+- preview
