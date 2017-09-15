@@ -53,5 +53,5 @@ these files is as follows:
 [fc]:              https://github.com/FontCustom/fontcustom
 [nanogui]:         https://github.com/wjakob/nanogui
 [install]:         https://github.com/FontCustom/fontcustom#installation
-[ccas4]:           https://creativecommons.org/licenses/by-sa/4.0/
+[ccsa4]:           https://creativecommons.org/licenses/by-sa/4.0/
 [nanogui_license]: https://github.com/wjakob/nanogui/blob/master/LICENSE.txt
