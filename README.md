@@ -21,6 +21,74 @@ There's probably a way to do this directly, but I couldn't figure out how to
 change things using `fontcustom` without just flattening the output directory
 structure to contain the fonts and css.
 
+### Minor Divergence from Entypo+
+
+Because these are getting used to embed in a C++ program with some `#define`
+directives, three icons were changed since `+` and `%` cannot be used (and the
+resultant output was some awkward `__` or trailing `_`):
+
+1. `google+.svg` -> `google-plus.svg`
+2. `google+-circled.svg` -> `google-plus-circled.svg`
+3. `resize-100%.svg` -> `resize-100-percent.svg`
+
+More concretely, though, the `diff` is relevant here as I manually edited the
+`.svg` images attributes using `vim`.  Since I'm doing this on a Unix system,
+it seems the line ending also got changed.  This did not cause issues for me
+but it may be a problem?  I manually added the `^M` back in the diff, though
+it likely won't display online.  Basically, just `revert` that commit if it
+is giving you trouble, but I really don't expect it to.
+
+```diff
+diff --git a/icons/Entypo+/google+-with-circle.svg b/icons/Entypo+/google-plus-with-circle.svg
+similarity index 95%
+rename from icons/Entypo+/google+-with-circle.svg
+rename to icons/Entypo+/google-plus-with-circle.svg
+index f268cd9..193861b 100644
+--- a/icons/Entypo+/google+-with-circle.svg
++++ b/icons/Entypo+/google-plus-with-circle.svg
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+ <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+-<svg version="1.1" id="Google_x2B__w_x2F__circle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
++<svg version="1.1" id="Google_plus_w_x2F__circle" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     x="0px" y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
+ <path d="M10,0.4c-5.302,0-9.6,4.298-9.6,9.6s4.298,9.6,9.6,9.6s9.6-4.298,9.6-9.6S15.302,0.4,10,0.4z M9.447,14.121
+    c-0.603,0.293-1.252,0.324-1.503,0.324c-0.048,0-0.075,0-0.075,0s-0.023,0-0.054,0c-0.392,0-2.343-0.09-2.343-1.867
+diff --git a/icons/Entypo+/google+.svg b/icons/Entypo+/google-plus.svg
+similarity index 95%
+rename from icons/Entypo+/google+.svg
+rename to icons/Entypo+/google-plus.svg
+index f364754..823c3a8 100644
+--- a/icons/Entypo+/google+.svg
++++ b/icons/Entypo+/google-plus.svg
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+ <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+-<svg version="1.1" id="Google_x2B_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
++<svg version="1.1" id="Google_plus" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+     y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
+ <path d="M1.989,5.589c0,1.494,0.499,2.572,1.482,3.205c0.806,0.52,1.74,0.598,2.226,0.598c0.118,0,0.213-0.006,0.279-0.01
+    c0,0-0.154,1.004,0.59,1.996H6.532c-1.289,0-5.493,0.269-5.493,3.727c0,3.516,3.861,3.695,4.636,3.695
+diff --git a/icons/Entypo+/resize-100%.svg b/icons/Entypo+/resize-100-percent.svg
+similarity index 75%
+rename from icons/Entypo+/resize-100%.svg
+rename to icons/Entypo+/resize-100-percent.svg
+index 1493bea..15fd572 100644
+--- a/icons/Entypo+/resize-100%.svg
++++ b/icons/Entypo+/resize-100-percent.svg
+@@ -1,7 +1,7 @@
+ <?xml version="1.0" encoding="utf-8"?>
+ <!-- Generator: Adobe Illustrator 18.1.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+ <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+-<svg version="1.1" id="Resize_100_x25_" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
++<svg version="1.1" id="Resize_100_percent" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px"
+     y="0px" viewBox="0 0 20 20" enable-background="new 0 0 20 20" xml:space="preserve">
+ <path d="M4.1,14.1L1,17l2,2l2.9-3.1L8,18v-6H2L4.1,14.1z M19,3l-2-2l-2.9,3.1L12,2v6h6l-2.1-2.1L19,3z"/>
+ </svg>
+```
+
 ## NanoGUI Generation
 
 The reason this repo exists is to update the [NanoGUI][nanogui] fonts.  Be warned

@@ -205,11 +205,11 @@
 .entypo-icon-github:before,
 .entypo-icon-github-with-circle:before,
 .entypo-icon-globe:before,
-.entypo-icon-google-:before,
-.entypo-icon-google--with-circle:before,
 .entypo-icon-google-drive:before,
 .entypo-icon-google-hangouts:before,
 .entypo-icon-google-play:before,
+.entypo-icon-google-plus:before,
+.entypo-icon-google-plus-with-circle:before,
 .entypo-icon-graduation-cap:before,
 .entypo-icon-grid:before,
 .entypo-icon-grooveshark:before,
@@ -330,7 +330,7 @@
 .entypo-icon-renren:before,
 .entypo-icon-reply:before,
 .entypo-icon-reply-all:before,
-.entypo-icon-resize-100-:before,
+.entypo-icon-resize-100-percent:before,
 .entypo-icon-resize-full-screen:before,
 .entypo-icon-retweet:before,
 .entypo-icon-rocket:before,
@@ -630,11 +630,11 @@
 .entypo-icon-github:before { content: "\f1b2"; }
 .entypo-icon-github-with-circle:before { content: "\f1b3"; }
 .entypo-icon-globe:before { content: "\f1b4"; }
-.entypo-icon-google-:before { content: "\f1b5"; }
-.entypo-icon-google--with-circle:before { content: "\f1b6"; }
-.entypo-icon-google-drive:before { content: "\f1b7"; }
-.entypo-icon-google-hangouts:before { content: "\f1b8"; }
-.entypo-icon-google-play:before { content: "\f1b9"; }
+.entypo-icon-google-drive:before { content: "\f1b5"; }
+.entypo-icon-google-hangouts:before { content: "\f1b6"; }
+.entypo-icon-google-play:before { content: "\f1b7"; }
+.entypo-icon-google-plus:before { content: "\f1b8"; }
+.entypo-icon-google-plus-with-circle:before { content: "\f1b9"; }
 .entypo-icon-graduation-cap:before { content: "\f1ba"; }
 .entypo-icon-grid:before { content: "\f1bb"; }
 .entypo-icon-grooveshark:before { content: "\f1bc"; }
@@ -755,7 +755,7 @@
 .entypo-icon-renren:before { content: "\f22f"; }
 .entypo-icon-reply:before { content: "\f230"; }
 .entypo-icon-reply-all:before { content: "\f231"; }
-.entypo-icon-resize-100-:before { content: "\f232"; }
+.entypo-icon-resize-100-percent:before { content: "\f232"; }
 .entypo-icon-resize-full-screen:before { content: "\f233"; }
 .entypo-icon-retweet:before { content: "\f234"; }
 .entypo-icon-rocket:before { content: "\f235"; }
