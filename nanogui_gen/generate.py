@@ -74,6 +74,12 @@ if __name__ == "__main__":
              All rights reserved. Use of this source code is governed by a
              BSD-style license that can be found in the LICENSE.txt file.
          */
+
+        /* Developer note: need to make a change to this file?
+         * Please raise an Issue on GitHub describing what needs to change.  This file
+         * was generated, so the scripts that generated it needs to update as well.
+         */
+
         /**
          * \file nanogui/entypo.h
          *
@@ -83,8 +89,9 @@ if __name__ == "__main__":
          *
          * This file defines the full listing of `Entypo <http://www.entypo.com/>`_
          * icons available in NanoGUI.  Please note that if viewing the documentation
-         * on the web, your browser may display the icons differentaly than what they
-         * look like in NanoGUI.
+         * on the web, your browser may display the icons differently than what they
+         * look like in NanoGUI.  Run the one of the :ref:`nanogui_example_icons`
+         * executables to see what they all look like in NanoGUI.
          *
          * .. warning::
          *
@@ -95,24 +102,10 @@ if __name__ == "__main__":
          * .. tip::
          *
          *    In C++, ``#include <nanogui/entypo.h>`` to gain access to the ``#define``
-         *    shown in these docs.  In Python, ``import nanogui.entypo``.  So in the
-         *    below table, when you see ``FLOW_TREE``, you would use it as
-         *
-         *    .. code-block:: cpp
-         *
-         *       #include <nanogui/entypo.h>
-         *       std::cout << "Prefix with ENTYPO_ICON_: " << ENTYPO_ICON_FLOW_TREE << std::endl;
-         *
-         *    and in Python:
-         *
-         *    .. code-block:: py
-         *
-         *       from nanogui import entypo
-         *       print("Prefix with entypo.ICON_: " + entypo.ICON_FLOW_TREE)
-         *
-         *    .. raw:: html
-         *
-         *       <p>Giving you access to the <code>FLOW_TREE</code> icon (<span class="entypo-icon-flow-tree"></span>).
+         *    shown in these docs.  In Python, ``from nanogui import entypo``.  So in the
+         *    below table, when you see ``ENTYPO_ICON_FLOW_TREE`` that is for C++, and
+         *    when you see ``ICON_FLOW_TREE``, that is for Python, and you would access
+         *    it using ``entypo.ICON_FLOW_TREE``.
          *
          * The following icons are available:
          *
@@ -122,13 +115,15 @@ if __name__ == "__main__":
          *      <div class="wy-table-responsive">
          *        <table class="docutils" border=1>
          *          <colgroup>
-         *            <col width="80%" />
-         *            <col width="20%" align="center" />
+         *            <col width="55%" align="center"/>
+         *            <col width="10%" align="center" />
+         *            <col width="35%" align="center"/>
          *          </colgroup>
          *          <thead valign="bottom">
          *            <tr class="row-odd">
-         *              <th class="head">Icon Name</th>
-         *              <th class="head">Icon</th>
+         *              <th class="head" align="center">C++ Definition</th>
+         *              <th class="head" align="center">Icon</th>
+         *              <th class="head" align="center">Python Definition</th>
          *            </tr>
          *          </thead>
          *          <tbody valign="top">
@@ -139,6 +134,11 @@ if __name__ == "__main__":
         #ifdef NANOGUI_PYTHON
 
         #include "python.h"
+
+        /* Developer note: need to make a change to this file?
+         * Please raise an Issue on GitHub describing what needs to change.  This file
+         * was generated, so the scripts that generated it needs to update as well.
+         */
 
         void register_constants_entypo(py::module &m) {
             /* Entypo constants */
@@ -161,17 +161,19 @@ if __name__ == "__main__":
         cpp_def = icon_def.split(" ")[1]
         py_def  = cpp_def.split("ENTYPO_ICON_")[1]
         pybind  = "C({0});".format(py_def)
-        py_name = "entypo.ICON_{0}".format(py_def)
+        py_name = "ICON_{0}".format(py_def)
 
         entypo_h.write(textwrap.dedent('''
             *            <tr class="{row_kind}">
-            *              <td><code>{code_name}</code></td>
-            *              <td><span class="entypo-icon-{name}"></span></td>
+            *              <td align="right"><code>{cpp_def}</code></td>
+            *              <td align="center"><span class="entypo-icon-{name}"></span></td>
+            *              <td align="left"><code>{py_name}</code>
             *            </tr>
         '''.format(
             row_kind=row_kind,
-            code_name=py_def,
-            name=icon_name
+            cpp_def=cpp_def,
+            name=icon_name,
+            py_name=py_name
         )).replace("\n*", "\n *").replace("\n", "", 1).rstrip())
         entypo_h.write("\n")  # rstrip removed two, we need 1
 
@@ -189,7 +191,7 @@ if __name__ == "__main__":
 
         #pragma once
 
-        // prevent individal pages from being generated for all of these
+        // prevent individual pages from being generated for all of these
         #if !defined(DOXYGEN_SHOULD_SKIP_THIS)
 
     '''.replace("\n", "", 1)))  # replace leading \n (NECESSARY!)
@@ -232,6 +234,11 @@ if __name__ == "__main__":
             All rights reserved. Use of this source code is governed by a
             BSD-style license that can be found in the LICENSE.txt file.
         */
+
+        /* Developer note: need to make a change to this file?
+         * Please raise an Issue on GitHub describing what needs to change.  This file
+         * was generated, so the scripts that generated it needs to update as well.
+         */
 
         #include <nanogui/nanogui.h>
         using namespace nanogui;
@@ -309,6 +316,10 @@ if __name__ == "__main__":
             # All rights reserved. Use of this source code is governed by a
             # BSD-style license that can be found in the LICENSE.txt file.
 
+            # Developer note: need to make a change to this file?
+            # Please raise an Issue on GitHub describing what needs to change.  This file
+            # was generated, so the scripts that generated it needs to update as well.
+
             import gc
 
             import nanogui
@@ -342,7 +353,7 @@ if __name__ == "__main__":
                 # of the icons -- see cpp example for alternative...
                 for key in entypo.__dict__.keys():
                     if key.startswith("ICON_"):
-                        b = Button(wrapper, key, entypo.__dict__[key])
+                        b = Button(wrapper, "entypo.{0}".format(key), entypo.__dict__[key])
                         b.setIconPosition(Button.IconPosition.Left)
                         b.setFixedWidth(half_width)
 
