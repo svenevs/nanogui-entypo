@@ -218,14 +218,14 @@ if __name__ == "__main__":
     constants_entypo.close()
 
     # generate the example icon programs
-    cpp_example = open("exampleIcons.cpp", "w")
+    cpp_example = open("example_icons.cpp", "w")
 
     # write the header of the cpp example
     cpp_example.write(textwrap.dedent(r'''
         /*
-            src/exampleIcons.cpp -- C++ version of an example application that shows
+            src/example_icons.cpp -- C++ version of an example application that shows
             all available Entypo icons as they would appear in NanoGUI itself.  For a Python
-            implementation, see '../python/exampleIcons.py'.
+            implementation, see '../python/example_icons.py'.
 
             NanoGUI was developed by Wenzel Jakob <wenzel.jakob@epfl.ch>.
             The widget drawing code is based on the NanoVG demo application
@@ -303,11 +303,11 @@ if __name__ == "__main__":
     cpp_example.close()
 
     # <3 python
-    with open("exampleIcons.py", "w") as py_example:
+    with open("example_icons.py", "w") as py_example:
         py_example.write(textwrap.dedent('''
-            # python/exampleIcons.py -- Python version of an example application that shows
+            # python/example_icons.py -- Python version of an example application that shows
             # all available Entypo icons as they would appear in NanoGUI itself.  For a C++
-            # implementation, see '../src/exampleIcons.cpp'.
+            # implementation, see '../src/example_icons.cpp'.
             #
             # NanoGUI was developed by Wenzel Jakob <wenzel.jakob@epfl.ch>.
             # The widget drawing code is based on the NanoVG demo application

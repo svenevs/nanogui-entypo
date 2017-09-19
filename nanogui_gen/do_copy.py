@@ -44,8 +44,8 @@ if __name__ == "__main__":
     # make sure they are all here
     entypo_h             = os.path.join(file_loc, "entypo.h")
     constants_entypo_cpp = os.path.join(file_loc, "constants_entypo.cpp")
-    cpp_example          = os.path.join(file_loc, "exampleIcons.cpp")
-    py_example           = os.path.join(file_loc, "exampleIcons.py")
+    cpp_example          = os.path.join(file_loc, "example_icons.cpp")
+    py_example           = os.path.join(file_loc, "example_icons.py")
 
     entypo_css           = os.path.join(gen_static, "entypo.css")
     entypo_eot           = os.path.join(gen_static, "entypo.eot")
