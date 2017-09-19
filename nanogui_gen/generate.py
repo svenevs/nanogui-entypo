@@ -93,11 +93,20 @@ if __name__ == "__main__":
          * look like in NanoGUI.  Run the one of the :ref:`nanogui_example_icons`
          * executables to see what they all look like in NanoGUI.
          *
-         * .. warning::
+         * .. note::
          *
          *    Constants you may have used in the past may no longer exist, e.g.
          *    the name may have changed slightly.  For example, ``ENTYPO_ICON_CIRCLED_HELP``
          *    is renamed to ``ENTYPO_ICON_HELP_WITH_CIRCLE``.
+         *
+         * .. warning::
+         *
+         *    Some icons have a "small" variant, e.g. ``ENTYPO_ICON_CHEVRON_SMALL_LEFT``
+         *    is smaller than ``ENTYPO_ICON_CHEVRON_LEFT``.  While these "small" icons
+         *    can be used, they may not be positioned correctly.  If you experience this
+         *    you can, instead of using the "small" variant, use the "regular" icon and
+         *    call the :func:`nanogui::Widget::setIconExtraScale` function with a value
+         *    of **less than** ``1.0`` to scale the icon size down.
          *
          * .. tip::
          *
