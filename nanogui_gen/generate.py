@@ -252,13 +252,50 @@ if __name__ == "__main__":
         #include <nanogui/nanogui.h>
         using namespace nanogui;
 
-        // add a button to the wrapper with a fixed size
-        // `icon` should be the defined constant in nanogui/entypo.h
-        // the button label will be the string that represents this
-        #define ADD_BUTTON(icon)                                           \
-            auto b_##icon = new Button(wrapper, #icon, icon, "mono-bold"); \
-            b_##icon->setIconPosition(Button::IconPosition::Left);         \
-            b_##icon->setFixedWidth(half_width);
+        class EscapeScreen : public nanogui::Screen {
+        public:
+            EscapeScreen(const Vector2i &size, const std::string &title, bool resizable)
+                : nanogui::Screen(size, title, resizable) { }
+
+            virtual ~EscapeScreen() { /* nothing to free */ }
+
+            // allow <ESCAPE> to exit
+            virtual bool keyboardEvent(int key, int scancode, int action, int modifiers) override {
+                if (key == GLFW_KEY_ESCAPE && modifiers == 0) {
+                    setVisible(false);
+                    return true;
+                }
+
+                return Screen::keyboardEvent(key, scancode, action, modifiers);
+            }
+        };
+
+        // Convenience macro for creating an IconBox. Make sure you put a semicolon after the call to this macro!
+        #define ADD_ICON(parent, icon, boxWidth) \
+            new IconBox(parent, #icon, icon, boxWidth)
+
+        class IconBox : public Widget {
+        public:
+            IconBox(Widget *parent, const std::string &name, int icon, int width)
+                : Widget(parent) {
+
+                this->setLayout(new BoxLayout(Orientation::Horizontal));
+
+                auto *b = new Button(this, "", icon);
+                b->setFixedWidth(40);
+
+                auto *text = new TextBox(this, name);
+                text->setDefaultValue(name);
+                text->setEditable(true);
+                /* Return false essentially makes it not possible to actually edit this text
+                 * box, but keeping it editable=true allows selection for copy-paste.  If the
+                 * text box is not editable, then the user cannot highlight it.
+                 */
+                text->setCallback([](const std::string &) { return false; });
+                text->setFont("mono-bold");
+                text->setFixedWidth(width - 40);
+            }
+        };
 
         int main(int /* argc */, char ** /* argv */) {
             nanogui::init();
@@ -269,8 +306,8 @@ if __name__ == "__main__":
                 static constexpr int height     = 800;
 
                 // create a fixed size screen with one window
-                Screen *screen = new Screen({width, height}, "NanoGUI Icons", false);
-                Window *window = new Window(screen, "All Icons");
+                EscapeScreen *screen = new EscapeScreen({width, height}, "NanoGUI Icons", false);
+                Window *window = new Window(screen, "");
                 window->setPosition({0, 0});
                 window->setFixedSize({width, height});
 
@@ -291,7 +328,7 @@ if __name__ == "__main__":
     for icon_name, icon_def, icon_code in cdefs:
         # icon_def is `#define ENTYPO_ICON_X`
         cpp_def = icon_def.split(" ")[1]
-        cpp_example.write("        ADD_BUTTON({cpp_def})\n".format(cpp_def=cpp_def))
+        cpp_example.write("        ADD_ICON(wrapper, {cpp_def}, half_width);\n".format(cpp_def=cpp_def))
 
     # close out the cpp example
     cpp_example.write(textwrap.dedent('''
@@ -335,6 +372,39 @@ if __name__ == "__main__":
             from nanogui import Screen, Window, Widget, GridLayout, VScrollPanel, Button
             from nanogui import entypo
 
+            class EscapeScreen(nanogui.Screen):
+                def __init__(self, size, title, resizable):
+                    super(EscapeScreen, self).__init__(size, title, resizable)
+
+                # allow <ESCAPE> to exit
+                def keyboardEvent(self, key, scancode, action, modifiers):
+                    if key == nanogui.glfw.KEY_ESCAPE and modifiers == 0:
+                        self.setVisible(False)
+                        return True
+
+                    return super(EscapeScreen, self).keyboardEvent(key, scancode, action, modifiers)
+
+
+            class IconBox(nanogui.Widget):
+                def __init__(self, parent, name, icon, width):
+                    super(IconBox, self).__init__(parent)
+
+                    self.setLayout(nanogui.BoxLayout(nanogui.Orientation.Horizontal))
+
+                    b = nanogui.Button(self, "", icon)
+                    b.setFixedWidth(40)
+
+                    text = nanogui.TextBox(self, name)
+                    text.setDefaultValue(name)
+                    text.setEditable(True)
+                    # Return false essentially makes it not possible to actually edit this text
+                    # box, but keeping it editable=true allows selection for copy-paste.  If the
+                    # text box is not editable, then the user cannot highlight it.
+                    text.setCallback(lambda x: False)
+                    text.setFont("mono-bold")
+                    text.setFixedWidth(width - 40)
+
+
             if __name__ == "__main__":
                 nanogui.init()
 
@@ -343,8 +413,8 @@ if __name__ == "__main__":
                 height     = 800
 
                 # create a fixed size screen with one window
-                screen = Screen((width, height), "NanoGUI Icons", False)
-                window = Window(screen, "All Icons")
+                screen = EscapeScreen((width, height), "NanoGUI Icons", False)
+                window = Window(screen, "")
                 window.setPosition((0, 0))
                 window.setFixedSize((width, height))
 
@@ -362,9 +432,7 @@ if __name__ == "__main__":
                 # of the icons -- see cpp example for alternative...
                 for key in entypo.__dict__.keys():
                     if key.startswith("ICON_"):
-                        b = Button(wrapper, "entypo.{0}".format(key), entypo.__dict__[key], "mono-bold")
-                        b.setIconPosition(Button.IconPosition.Left)
-                        b.setFixedWidth(half_width)
+                        IconBox(wrapper, key, entypo.__dict__[key], half_width)
 
                 screen.performLayout()
                 screen.drawAll()
